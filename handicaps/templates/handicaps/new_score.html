@@ -1,0 +1,13 @@
+{% extends "handicaps/base.html" %}
+
+{% block content %}
+
+  <p><a href="{% url 'handicaps:player' player.id %}">{{ player }}</a></p>
+
+  <form action="{% url 'handicaps:new_score' player.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add Score</button>
+  </form>
+
+{% endblock content %}

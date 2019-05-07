@@ -1,0 +1,42 @@
+{% extends "handicaps/base.html" %}
+
+{% block content %}
+
+<h1>PGA Tour Courses 2019 Season</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Course</th>
+        <th>Par</th>
+        <th>Course Rating</th>
+        <th>Slope Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in courses %}
+        <tr>
+          <td>
+              {{ course.event }}
+            </td>
+          <td>
+            {{ course.name }}
+          </td>
+          <td>
+            {{ course.par }}
+          </td>
+          <td>
+            {{ course.rating }}
+          </td>
+          <td>
+            {{ course.slope }}
+          </td>
+        </tr>
+      {% empty %}
+        <li> No courses currently added </li>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

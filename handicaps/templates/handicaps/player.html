@@ -1,0 +1,45 @@
+{% extends 'handicaps/base.html' %}
+{% load mathfilters %}
+
+{% block header %}
+  <h2>{{ player }}</h2>
+{% endblock header %}
+
+
+{% block content %}
+
+  <table class="table">
+    <thead align="center">
+      <tr>
+        <th>Date Played </th>
+        <th>Course </th>
+        <th>Gross Score </th>
+        <th>To Par </th>
+        <th>Course Rating </th>
+        <th>Adjusted Gross</th>
+        <th>Handicap </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for score in scores %}
+        <tr>
+          <td>{{ score.date_played }}</td>
+          <td>{{ score.course }}</td>
+          <td>{{ score.gross_score }}</td>
+          <td>{{ score.gross_score|sub:score.course.par }}</td>
+          <td>{{ score.course.rating }}</td>
+          <td>{{ score.gross_score|sub:score.course.rating|mul:113|div:score.course.slope|floatformat }}</td>
+          <td>{{ score.handicap }}</td>
+        </tr>
+      {% empty %}
+        <p>No Scores Added for this Player yet.</p>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p>
+    <br>
+    <h4><a href="{% url 'handicaps:new_score' player.id %}">Add a new round</a></h4>
+  </p>
+
+{% endblock content %}

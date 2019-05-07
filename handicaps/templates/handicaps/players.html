@@ -1,0 +1,39 @@
+{% extends "handicaps/base.html" %}
+
+{% block header %}
+  <h1>Players</h1>
+{% endblock header %}
+
+{% block content %}
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>World Ranking</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+      <tr>
+        <td>
+          <a href="{% url 'handicaps:player' player.id %}">{{ player }}</a>
+        </td>
+        <td>
+          {{ player.world_ranking }}
+        </td>  
+      </tr>
+    {% empty %}
+      <li> No golfers saved </li>
+    {% endfor %}
+    </tbody>  
+  </table>
+
+  <div>
+    <br>
+    <br>
+    <h4><a href ="{% url 'handicaps:new_player' %}">Add a new Player</a></h4>
+  </div>
+  
+
+{% endblock content %}
